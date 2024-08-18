@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go Premium - Twitter</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .premium-container {
+            background-color: #1da1f2;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .premium-container h2 {
+            margin-bottom: 20px;
+        }
+        .premium-container p {
+            margin-bottom: 20px;
+        }
+        .premium-container button {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .premium-container button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="premium-container">
+        <h2>Go Premium</h2>
+        <p>Unlock exclusive features with Twitter Premium. Enjoy an ad-free experience, priority support, and more.</p>
+        <button onclick="goToHome()">Go to Home</button>
+    </div>
+    <script>
+        function goToHome() {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>

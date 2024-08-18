@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Twitter</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background-color: #151515;
+            width: 100%;
+            max-width: 300px;
+        }
+        .sidebar a, .sidebar button {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .sidebar a:hover, .sidebar button:hover {
+            background-color: #333;
+        }
+        .sidebar i {
+            margin-right: 10px;
+        }
+        .sidebar button {
+            background-color: #1da1f2;
+            border-radius: 5px;
+            text-align: center;
+            justify-content: center;
+        }
+        .sidebar button:hover {
+            background-color: #0a74b9;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .post {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            position: relative;
+        }
+        .bookmark {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+        }
+        @media (min-width: 768px) {
+            body {
+                flex-direction: row;
+            }
+            .sidebar {
+                width: 20%;
+                max-width: none;
+            }
+            .content {
+                width: 80%;
+            }
+        }
+    </style>
+    <!-- Icons from FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" onclick="showProfile()"><i class="fas fa-user"></i>Profile</a>
+        <a href="premium.html"><i class="fas fa-star"></i>Premium</a>
+        <a href="bookmarks.html"><i class="fas fa-bookmark"></i>Bookmarks</a>
+        <a href="#"><i class="fas fa-list"></i>Lists</a>
+        <a href="#"><i class="fas fa-dollar-sign"></i>Monetisation</a>
+        <button onclick="logout()"><i class="fas fa-sign-out-alt"></i>Logout</button>
+    </div>
+    <div class="content">
+        <h1>Welcome to Twitter</h1>
+        <div class="post" id="post1">
+            <h2>Indian Budget</h2>
+            <p>
+                The Indian Budget 2024 aims to boost economic growth through significant investments in infrastructure and technology. Key initiatives include increased spending on healthcare and education, tax reforms to simplify compliance, and measures to support small and medium enterprises (SMEs). The budget also emphasizes sustainable development, with allocations for renewable energy projects and environmental conservation. Additionally, there are incentives for startups and innovations to drive the digital economy. Overall, the budget seeks to create a balanced and inclusive growth trajectory for the nation. <a href="https://en.wikipedia.org/wiki/2024_Union_budget_of_India" target="_blank">Read more</a>.
+            </p>
+            <i class="fas fa-bookmark bookmark" onclick="toggleBookmark('post1')"></i>
+        </div>
+        <div class="post" id="post2">
+            <h2>Iran Budget</h2>
+            <p>
+                The Iran Budget 2024 focuses on economic stabilization and social welfare. Key measures include substantial funding for healthcare and education, initiatives to support domestic industries, and efforts to improve the efficiency of public sector spending. The budget also addresses inflation and unemployment through targeted subsidies and financial reforms. Emphasis is placed on reducing dependency on oil revenues by diversifying the economy and encouraging investment in non-oil sectors. Environmental sustainability and renewable energy projects are also prioritized to ensure long-term economic resilience. <a href="https://en.wikipedia.org/wiki/Economy_of_Iran" target="_blank">Read more</a>.
+            </p>
+            <i class="fas fa-bookmark bookmark" onclick="toggleBookmark('post2')"></i>
+        </div>
+        <div class="post" id="post3">
+            <h2>China Budget</h2>
+            <p>
+                The China Budget 2024 aims to maintain stable economic growth while addressing social and environmental challenges. Major investments are directed towards infrastructure, technological innovation, and green energy projects. The budget includes significant allocations for healthcare, education, and poverty alleviation programs. Fiscal policies are designed to support small and medium-sized enterprises (SMEs) and stimulate consumer spending. Additionally, the budget outlines measures to enhance environmental protection and combat climate change through substantial funding for renewable energy and conservation projects. <a href="https://en.wikipedia.org/wiki/Economy_of_China" target="_blank">Read more</a>.
+            </p>
+            <i class="fas fa-bookmark bookmark" onclick="toggleBookmark('post3')"></i>
+        </div>
+    </div>
+    <script>
+        function showProfile() {
+            window.location.href = 'profile.html';
+        }
+
+        function logout() {
+            window.location.href = 'relogin.html';
+        }
+
+        function toggleBookmark(postId) {
+            let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+            const index = bookmarks.indexOf(postId);
+
+            if (index > -1) {
+                bookmarks.splice(index, 1);
+            } else {
+                bookmarks.push(postId);
+            }
+
+            localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+            updateBookmarks();
+        }
+
+        function updateBookmarks() {
+            let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+            document.querySelectorAll('.post').forEach(post => {
+                const bookmarkIcon = post.querySelector('.bookmark');
+                if (bookmarks.includes(post.id)) {
+                    bookmarkIcon.style.color = '#FFD700'; // Gold color for bookmarked
+                } else {
+                    bookmarkIcon.style.color = ''; // Default color
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', updateBookmarks);
+    </script>
+</body>
+</html>

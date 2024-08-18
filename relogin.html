@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Re-Login - Twitter</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .relogin-container {
+            background-color: #1da1f2;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .relogin-container input {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        .relogin-container button {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .relogin-container button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="relogin-container">
+        <h2>Re-Login</h2>
+        <form id="reloginForm" action="login.html">
+            <input type="text" id="reloginName" placeholder="Full Name" required>
+            <input type="email" id="reloginEmail" placeholder="Email" required>
+            <input type="password" id="reloginPassword" placeholder="Password" required>
+            <button type="submit">Re-Login</button>
+        </form>
+    </div>
+    <script>
+        // Prefill the form fields with stored values
+        document.getElementById('reloginName').value = localStorage.getItem('name');
+        document.getElementById('reloginEmail').value = localStorage.getItem('email');
+        document.getElementById('reloginPassword').value = localStorage.getItem('password');
+
+        // Function to handle form submission
+        document.getElementById('reloginForm').addEventListener('submit', function(event) {
+            const storedName = localStorage.getItem('name');
+            const storedEmail = localStorage.getItem('email');
+            const storedPassword = localStorage.getItem('password');
+
+            const currentName = document.getElementById('reloginName').value;
+            const currentEmail = document.getElementById('reloginEmail').value;
+            const currentPassword = document.getElementById('reloginPassword').value;
+
+            if (currentName !== storedName || currentEmail !== storedEmail || currentPassword !== storedPassword) {
+                event.preventDefault();
+                alert('Wrong information entered. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

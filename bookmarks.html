@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmarks - Twitter</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        .post {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .empty {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Your Bookmarks</h1>
+        <div id="bookmarkedPosts"></div>
+        <div class="empty" id="emptyMessage" style="display: none;">No bookmarks yet.</div>
+    </div>
+    <script>
+        const posts = {
+            post1: {
+                title: 'Indian Budget',
+                content: `The Indian Budget 2024 aims to boost economic growth through significant investments in infrastructure and technology. Key initiatives include increased spending on healthcare and education, tax reforms to simplify compliance, and measures to support small and medium enterprises (SMEs). The budget also emphasizes sustainable development, with allocations for renewable energy projects and environmental conservation. Additionally, there are incentives for startups and innovations to drive the digital economy. Overall, the budget seeks to create a balanced and inclusive growth trajectory for the nation. <a href="https://en.wikipedia.org/wiki/2024_Union_budget_of_India" target="_blank">Read more</a>.`
+            },
+            post2: {
+                title: 'Iran Budget',
+                content: `The Iran Budget 2024 focuses on economic stabilization and social welfare. Key measures include substantial funding for healthcare and education, initiatives to support domestic industries, and efforts to improve the efficiency of public sector spending. The budget also addresses inflation and unemployment through targeted subsidies and financial reforms. Emphasis is placed on reducing dependency on oil revenues by diversifying the economy and encouraging investment in non-oil sectors. Environmental sustainability and renewable energy projects are also prioritized to ensure long-term economic resilience. <a href="https://en.wikipedia.org/wiki/Economy_of_Iran" target="_blank">Read more</a>.`
+            },
+            post3: {
+                title: 'China Budget',
+                content: `The China Budget 2024 aims to maintain stable economic growth while addressing social and environmental challenges. Major investments are directed towards infrastructure, technological innovation, and green energy projects. The budget includes significant allocations for healthcare, education, and poverty alleviation programs. Fiscal policies are designed to support small and medium-sized enterprises (SMEs) and stimulate consumer spending. Additionally, the budget outlines measures to enhance environmental protection and combat climate change through substantial funding for renewable energy and conservation projects. <a href="https://en.wikipedia.org/wiki/Economy_of_China" target="_blank">Read more</a>.`
+            }
+        };
+
+        function loadBookmarks() {
+            let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+            const container = document.getElementById('bookmarkedPosts');
+            container.innerHTML = '';
+
+            if (bookmarks.length === 0) {
+                document.getElementById('emptyMessage').style.display = 'block';
+            } else {
+                document.getElementById('emptyMessage').style.display = 'none';
+                bookmarks.forEach(postId => {
+                    const post = posts[postId];
+                    const postDiv = document.createElement('div');
+                    postDiv.className = 'post';
+                    postDiv.innerHTML = `<h2>${post.title}</h2><p>${post.content}</p>`;
+                    container.appendChild(postDiv);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadBookmarks);
+    </script>
+</body>
+</html>
